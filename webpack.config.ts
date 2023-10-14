@@ -1,7 +1,6 @@
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import * as path from "path";
 import * as webpack from "webpack";
-import "webpack-dev-server";
 
 // Basic Webpack config for TypeScript, based on
 // https://webpack.js.org/guides/typescript/ .
@@ -9,7 +8,7 @@ const config: webpack.Configuration = {
   // mode and devtool are overridden by `npm run build` for production mode.
   mode: "development",
   devtool: "eval-source-map",
-  entry: "./src/main.ts",
+  entry: "./client/src/main.tsx",
   module: {
     rules: [
       {
@@ -22,7 +21,10 @@ const config: webpack.Configuration = {
         enforce: "pre",
         use: ["source-map-loader"],
       },
-      // Other loaders here...
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
   resolve: {
@@ -36,15 +38,9 @@ const config: webpack.Configuration = {
   plugins: [
     // Use src/index.html as the entry point.
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: "./client/src/index.html",
     }),
   ],
-  // webpack-dev-server config.
-  devServer: {
-    port: 3000,
-    compress: true,
-    static: path.join(__dirname, "dist"),
-  },
 };
 
 export default config;

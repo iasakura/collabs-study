@@ -7,6 +7,9 @@
       /* Prevent errors caused by other libraries. */
       "skipLibCheck": true,
       /* Enable interop with dependencies using different module systems. */
-      "esModuleInterop": true
-    }
+      "esModuleInterop": true,
+      /* Use tsc (npm run build) to typecheck only. */
+      "noEmit": true
+    },
+    "include": ["bin"]
   }
