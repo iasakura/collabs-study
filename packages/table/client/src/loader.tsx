@@ -4,6 +4,17 @@ import { Table, TableDoc, TableKey, newId } from "./table";
 import { CRuntime, CLazyMap, CText, CValueList } from "@collabs/collabs";
 
 function makeBaseState(): Uint8Array {
+  const colIds = [
+    "9aee2944-79b7-43d8-9332-c78c129af41d",
+    "dd24f009-8409-454f-a03d-e90acf5d60d8",
+    "22e54e82-52db-43b7-b6d8-ca59c7486cb8",
+  ];
+  const rowIds = [
+    "757c1dec-0b75-411e-9211-286c57742a8d",
+    "b4283f01-7c0a-4816-8065-a7f33b3f4386",
+    "56c58892-caff-4c0e-a2b1-a7dc69d9ae88",
+  ];
+
   // Set up your CRuntime + Collabs (or AbstractDoc) as usual, but
   // with replicaID "BASE".
   const doc = new CRuntime({ debugReplicaID: "BASE" });
@@ -21,8 +32,8 @@ function makeBaseState(): Uint8Array {
   );
   doc.transact(() => {
     for (let i = 0; i < 3; ++i) {
-      colKeys.push(newId());
-      rowKeys.push(newId());
+      colKeys.push(colIds[i]);
+      rowKeys.push(rowIds[i]);
     }
     for (let i = 0; i < 3; ++i) {
       for (let j = 0; j < 3; ++j) {

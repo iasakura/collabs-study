@@ -58,7 +58,10 @@ export class TableDoc extends AbstractDoc {
   };
 
   setCell = (rowKey: TableKey, colKey: TableKey, text: string) => {
-    const cell = this.table.set([rowKey, colKey]);
+    const cell = this.table.getIfPresent([rowKey, colKey]);
+    if (!cell) {
+      throw Error("Why?");
+    }
     cell.clear();
     cell.insert(0, text);
     console.log(cell);
